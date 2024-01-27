@@ -2,3 +2,4 @@
 green_taxi_postgres_data
 green_taxi.csv
 zones.csv
+.env
