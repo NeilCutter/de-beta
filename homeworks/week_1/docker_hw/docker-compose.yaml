@@ -1,0 +1,35 @@
+services:
+  green_taxi_pgdatabase:
+    image: postgres:13
+    env_file:
+      - .env
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+    volumes:
+      - "./green_taxi_postgres_data:/var/lib/postgresql/data:rw"
+    ports:
+      - "5432:5432"
+    networks:
+      - hwnetwork
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=${PGADMIN_DEFAULT_EMAIL}
+      - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_DEFAULT_PASSWORD}
+    volumes:
+      - "pg_con:/var/lib/pgadmin:rw"
+    ports:
+      - "8080:80"
+    networks:
+      - hwnetwork
+volumes:
+  pg_con:
+
+networks:
+  hwnetwork:
+    driver: bridge
+
+    
